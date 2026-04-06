@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Repo to TXT Compiler</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Repo to TXT Compiler</p>
+        <h1>Convert GitHub repositories into a single clean text file.</h1>
+        <p class="subhead">
+          Built for AI workflows, code review, and easy sharing. Choose exactly what gets included.
+        </p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <form id="compileForm" class="form" method="post" action="/compile">
+        <div class="field full">
+          <label for="repo_url">GitHub repository URL</label>
+          <input
+            id="repo_url"
+            name="repo_url"
+            type="url"
+            placeholder="https://github.com/owner/repo"
+            required
+          />
+        </div>
+
+        <div class="grid">
+          <div class="field">
+            <label for="preset">Preset</label>
+            <select id="preset" name="preset">
+              <option value="standard" selected>Standard</option>
+              <option value="code_only">Code only</option>
+              <option value="frontend">Frontend</option>
+              <option value="backend">Backend</option>
+              <option value="javascript">JavaScript</option>
+              <option value="php">PHP</option>
+              <option value="python">Python</option>
+              <option value="all_files">All files</option>
+              <option value="custom">Custom extensions</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="max_file_size_kb">Max file size (KB)</label>
+            <input id="max_file_size_kb" name="max_file_size_kb" type="number" min="1" value="250" />
+          </div>
+        </div>
+
+        <div class="field full">
+          <label for="custom_extensions">Custom extensions</label>
+          <textarea
+            id="custom_extensions"
+            name="custom_extensions"
+            rows="2"
+            placeholder=".py, .js, .php, .ts"
+          ></textarea>
+          <p class="hint">Used only when preset is set to Custom extensions.</p>
+        </div>
+
+        <div class="field full">
+          <label for="exclude_dirs">Excluded folders</label>
+          <textarea
+            id="exclude_dirs"
+            name="exclude_dirs"
+            rows="2"
+            placeholder=".git,node_modules,__pycache__,dist,build,.venv,venv,env,.next,coverage"
+          >{{ default_exclusions }}</textarea>
+          <p class="hint">Comma or space separated.</p>
+        </div>
+
+        <div class="toggles">
+          <label><input type="checkbox" name="include_tree" checked /> Include file tree</label>
+          <label><input type="checkbox" name="include_headers" checked /> Include file headers</label>
+          <label><input type="checkbox" name="include_line_numbers" /> Include line numbers</label>
+          <label><input type="checkbox" name="include_hidden" /> Include hidden files</label>
+        </div>
+
+        <div class="actions">
+          <button id="submitBtn" type="submit">Generate TXT</button>
+          <p id="status" class="status">Ready.</p>
+        </div>
+      </form>
+    </section>
+
+    <section class="note">
+      <div>
+        <h2>Recommended use</h2>
+        <p>Use Standard for general repo exports. Switch to a language preset when you only want a specific stack.</p>
+      </div>
+      <div>
+        <h2>Output</h2>
+        <p>The result is a downloadable .txt file with repository info, a tree view, and the selected source files.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
