@@ -7,10 +7,10 @@ from pathlib import Path
 
 PRESETS = {
     "standard": None,
-    "code_only": {".py", ".js", ".ts", ".php", ".java"},
-    "frontend": {".js", ".ts", ".html", ".css"},
-    "backend": {".py", ".php", ".java"},
-    "javascript": {".js", ".ts"},
+    "code_only": {".py", ".js", ".ts", ".php"},
+    "frontend": {".js", ".html", ".css"},
+    "backend": {".py", ".php"},
+    "javascript": {".js"},
     "php": {".php"},
     "python": {".py"},
     "all_files": None,
@@ -42,14 +42,11 @@ def build_tree(root: Path):
     lines = []
     for dirpath, dirnames, filenames in os.walk(root):
         dirnames[:] = [d for d in dirnames if d not in EXCLUDE_DIRS]
-
         level = dirpath.replace(str(root), "").count(os.sep)
         indent = "  " * level
         lines.append(f"{indent}{os.path.basename(dirpath)}/")
-
         for f in filenames:
             lines.append(f"{indent}  {f}")
-
     return "\n".join(lines)
 
 
@@ -89,7 +86,6 @@ def compile_repo(root_dir, options: CompileOptions):
                 continue
 
             rel = path.relative_to(root)
-
             output.append(f"\n--- FILE: {rel} ---\n")
 
             if options.include_line_numbers:
