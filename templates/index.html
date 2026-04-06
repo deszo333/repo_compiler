@@ -1,40 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Repo to TXT Compiler</title>
-  <link rel="stylesheet" href="/static/style.css" />
+  <title>Repo Compiler</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <main class="shell">
-    <section class="hero">
-      <div>
-        <p class="eyebrow">Repo to TXT Compiler</p>
-        <h1>Convert GitHub repositories into a single clean text file.</h1>
-        <p class="subhead">
-          Built for AI workflows, code review, and easy sharing. Choose exactly what gets included.
-        </p>
-      </div>
-    </section>
+<div class="box">
+  <h1>Repo Compiler</h1>
+  <form method="post" action="/compile">
+    <input name="repo_url" placeholder="GitHub URL" required>
 
-    <section class="panel">
-      <form id="compileForm" class="form" method="post" action="/compile">
-        <div class="field full">
-          <label for="repo_url">GitHub repository URL</label>
-          <input
-            id="repo_url"
-            name="repo_url"
-            type="url"
-            placeholder="https://github.com/owner/repo"
-            required
-          />
-        </div>
+    <select name="preset">
+      <option value="standard">Standard</option>
+      <option value="code_only">Code Only</option>
+      <option value="frontend">Frontend</option>
+      <option value="backend">Backend</option>
+      <option value="javascript">JS</option>
+      <option value="php">PHP</option>
+      <option value="python">Python</option>
+      <option value="all_files">All Files</option>
+      <option value="custom">Custom</option>
+    </select>
 
-        <div class="grid">
-          <div class="field">
-            <label for="preset">Preset</label>
-            <select id="preset" name="preset">
+    <input name="custom_extensions" placeholder=".py,.js">
+
+    <label><input type="checkbox" name="include_tree" checked> Tree</label>
+    <label><input type="checkbox" name="include_line_numbers"> Line Numbers</label>
+
+    <button>Generate</button>
+  </form>
+</div>
+</body>
+</html>            <select id="preset" name="preset">
               <option value="standard" selected>Standard</option>
               <option value="code_only">Code only</option>
               <option value="frontend">Frontend</option>
