@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Repo Compiler</title>
-<link rel="stylesheet" href="/static/style.css">
+    <title>Repo Compiler</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<div class="box">
-<h1>Repo Compiler</h1>
-<form method="post" action="/compile">
-<input name="repo_url" placeholder="GitHub URL" required>
-<button>Generate</button>
-</form>
-</div>
+    <div class="box">
+        <h1>Repo Compiler</h1>
+        
+        <form id="compileForm" method="post" action="/compile">
+            <input name="repo_url" placeholder="GitHub URL" required>
+            
+            <select name="preset" id="preset" style="width: 100%; margin: 5px 0; padding: 10px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;">
+                <option value="standard">Standard</option>
+                <option value="code_only">Code Only</option>
+                <option value="frontend">Frontend (.js, .html, .css)</option>
+                <option value="backend">Backend (.py, .php)</option>
+                <option value="all_files">All Files</option>
+                <option value="custom">Custom Extensions</option>
+            </select>
+            
+            <input name="custom_extensions" id="custom_extensions" placeholder="e.g. .py, .js" disabled>
+            
+            <button id="submitBtn">Generate</button>
+            
+            <p id="status" style="text-align: center; margin-top: 10px; font-size: 14px; color: #aaa;"></p>
+        </form>
+    </div>
+
+    <script src="/static/app.js"></script>
 </body>
 </html>
